@@ -5,4 +5,4 @@ Bilgisayar görüşü temelli, Opencv, Pyautogui gibi kütüphaneleri kullanarak
 
 <br>1920x1080p, Android 9 Bluestacks, Karanlık Mod...
 <br>Bir yere tıkladığı zaman , tüm ekranın alıntısını alıyor, tıkladığı yerleri kare ile işaretleyip aynı klasöre kaydediyor.
-<br>İhtiyacını yoksa bot ayarlarından kapatabilirsiniz.
+<br>İhtiyacınız yoksa bot ayarlarından kapatabilirsiniz.
