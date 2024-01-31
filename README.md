@@ -1,2 +1,3 @@
 # Genel_Oyun_Hilesi
-Opencv, Pyautogui gibi kütüphaneleri kullanarak yazdığım. Ufacık bir çabayla çoğu oyunu entegre edebileceğiniz otomatik tıklama botu.
+Bilgisayar görüşü temelli, Opencv, Pyautogui gibi kütüphaneleri kullanarak yazdığım. Ufacık bir çabayla çoğu oyunda kullanabileceğiniz otomatik tıklama botu.
+
