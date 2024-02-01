@@ -10,8 +10,8 @@ from colorama import Fore, init
 
 #İşlem geciktirme
 tiklama_gecikmesi=0.1 ### Tıklamalar arasında geçen süre (Saniye cinsinden)
-islem_gecikmesi=1 ### Yapılan işlemler arasında geçen süre (Saniye cinsinden)
-herseyi_tekrarlama_gecikmesi= 30 #7200 #2 saat
+islem_gecikmesi=0.05 ### Yapılan işlemler arasında geçen süre (Saniye cinsinden)
+herseyi_tekrarlama_gecikmesi= 1 #7200 #2 saat
 
 #Dosya yolları
 cwd = os.getcwd()+"\\";
@@ -40,6 +40,17 @@ hata_ayikla=False; #True tıklanan alanları kırmızı dikdörtgen içine alara
 tiklama_kaydi=True;
 cift_tiklama=False;
 
+#Değiştirmeye gerek olmayan değişkenler
+fare_konumu_x=10;
+fare_konumu_y=10;
+
+def fare_konumu(islem=""):
+    global fare_konumu_x,fare_konumu_y
+    if islem=="kaydet":
+       fare_konumu_x, fare_konumu_y= pyautogui.position()
+    elif islem=="geri_yukle":
+        pyautogui.moveTo(fare_konumu_x,fare_konumu_y);
+
 def bekle(sure):
     time.sleep(sure)
 
@@ -53,7 +64,7 @@ def ekrana_tikla(x_pos,y_pos):
         pyautogui.mouseDown(button='left',x=x_pos,y=y_pos)
         bekle(tiklama_gecikmesi)
         pyautogui.mouseUp(button='left',x=x_pos,y=y_pos)
-    bekle(islem_gecikmesi)
+    #bekle(islem_gecikmesi)
     
 def ekran_tarama():#Ekran resmini kaydetme
     ekran= ImageGrab.grab()
@@ -61,7 +72,7 @@ def ekran_tarama():#Ekran resmini kaydetme
     ekran.save("ekran_tarama.png","PNG")
     
 def hedef_bul(aranacak_resim,benzerlik_yuzdesi,tikla=False,islem=""):
-    time.sleep(islem_gecikmesi);
+    bekle(islem_gecikmesi)
     ekran_tarama()
     harita_0= cv2.imread(ekran_tarama_sonuc_yolu, cv2.IMREAD_UNCHANGED)
     hedef_0= cv2.imread(aranacak_resim, cv2.IMREAD_UNCHANGED)
@@ -104,7 +115,9 @@ def hedef_bul(aranacak_resim,benzerlik_yuzdesi,tikla=False,islem=""):
             cv2.imwrite(kayit_yolu+str(mevcut_tarih)+".png",harita_0)
         #Ekrandaki resimlere tıklayalım
         for (x,y,genislik,yukseklik) in konumlandirma_dikdortgenleri:
+            fare_konumu("kaydet");
             ekrana_tikla(x,y)
+            fare_konumu("geri_yukle");
             #yaptığımız işlemin adını ekrana yazdıralım
             print(islem)
             #eğer iksir, altin topluyorsak ya da tamam tuşuna basıyorsak, yanlış birşeye basmamız ihtimaline karşı
@@ -139,5 +152,5 @@ while (1):
         hedef_bul(oyunu_tekrar_yukle_resim_yolu,oyunu_tekrar_yukle_resim_benzerlik_yuzdesi,True,str(datetime.datetime.now())+Fore.BLUE+" oyuna yeniden baglaniliyor"+Fore.WHITE)
         hedef_bul(carpi_resim_yolu,carpi_resim_benzerlik_yuzdesi,True,str(datetime.datetime.now())+Fore.RED+" carpi tusuna basildi"+Fore.WHITE)
         hedef_bul(tamam_resim_yolu,tamam_resim_benzerlik_yuzdesi,True,str(datetime.datetime.now())+Fore.GREEN+" tamam tusuna basildi"+Fore.WHITE)
-        bekle(30);
+        bekle(islem_gecikmesi);
     bekle(herseyi_tekrarlama_gecikmesi)
