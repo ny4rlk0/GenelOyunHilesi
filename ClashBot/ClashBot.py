@@ -141,8 +141,8 @@ def hedef_bul(aranacak_resim,benzerlik_yuzdesi,tikla=False,islem=""):
                 hedef_bul(sifirla_resim_yolu,sifirla_resim_benzerlik_yuzdesi,True,str(tarih_saat())+Fore.LIGHTBLUE_EX+" tiklama sifirlandi."+Fore.WHITE)
                 break
     #Birleştirmeden sonraki konum sayısını ekrana yazdıralım
-    if (len(konumlandirma_dikdortgenleri)!=0 and len(konumlandirma_dikdortgenleri)!=1):
-        print("Yakin konumlari birlestirmeden sonraki sayi:"+str(len(konumlandirma_dikdortgenleri)))
+    #if (len(konumlandirma_dikdortgenleri)!=0 and len(konumlandirma_dikdortgenleri)!=1):
+    #    print("Yakin konumlari birlestirmeden sonraki sayi:"+str(len(konumlandirma_dikdortgenleri)))
     #İşaretlenen yerleri ekranda gösterelim
     if(hata_ayikla):
         cv2.imshow("harita_0",harita_0)
